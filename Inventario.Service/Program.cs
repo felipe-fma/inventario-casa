@@ -2,6 +2,18 @@ using Inventario.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowReactApp",
+            builder =>
+            {
+                builder.WithOrigins("http://localhost:3000") // URL do seu app React
+                       .AllowAnyHeader()
+                       .AllowAnyMethod();
+            });
+    });
+
+
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>();
@@ -16,6 +28,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseCors("AllowReactApp");
 
 app.UseHttpsRedirection();
 

@@ -58,7 +58,6 @@ namespace Service.Controllers
         }
 
         // POST: api/Items
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public ActionResult<Item> PostItem(Item item)
         {

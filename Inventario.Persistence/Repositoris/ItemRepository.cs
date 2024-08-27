@@ -30,6 +30,8 @@ public class ItensRepository
         
         itemOld.Name = itemNew.Name;
         itemOld.Categoric = itemNew.Categoric;
+        itemOld.MinimalAmount = itemNew.MinimalAmount;
+        itemOld.Amount = itemNew.Amount;
         itemOld.CreatedUtc = DateTime.Now;
 
         _db.SaveChanges();
