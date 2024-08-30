@@ -1,19 +1,26 @@
 import { Item } from './Item';
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 interface ItemTableCardProps {
     item: Item;
+    handleRemove: (item : Item) => void;
 }
 
-function ItemTableCard(props: ItemTableCardProps) {
+function ItemTableCard({item, handleRemove }: ItemTableCardProps) {
     const handleRemoveClick = (itemBeingRemove: Item) => {
-        console.log(itemBeingRemove);
+        handleRemove(itemBeingRemove);
+
     };
 
-    const { item } = props;
+    let navigate = useNavigate(); 
+    const handleEditClick = (itemBeingEdit: Item) =>{ 
+        let path = `/item/${itemBeingEdit.id}`; 
+        navigate(path);
+    }
 
     return (
         <tr>
@@ -21,22 +28,22 @@ function ItemTableCard(props: ItemTableCardProps) {
             <td>{item.name}</td>
             <td>{item.categoric}</td>
             <td>{item.amount}</td>
-            <td>{item.minimal_amount}</td>
             <td>
-                <div className="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                    <Link className="btn btn-primary"
-                        to={{
-                            pathname: `/item/${item.id}`
+                {item.minimal_amount}
+                <ButtonGroup className="sd-offset-4" size="sm">
+                    <Button variant="primary" type="button" 
+                        onClick={() => {
+                            handleEditClick(item); 
                         }}>
                         <FontAwesomeIcon icon={faPencil} />
-                    </Link>
-                    <button type='button' className="btn btn-danger"
+                    </Button>
+                    <Button variant="danger" type="button" 
                         onClick={() => {
                             handleRemoveClick(item);
                         }}>
                         <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                </div>
+                    </Button>
+                </ButtonGroup>
             </td>
         </tr>
     );

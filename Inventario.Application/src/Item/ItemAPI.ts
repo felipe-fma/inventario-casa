@@ -62,6 +62,23 @@ const ItemAPI = {
                 );
             });
     },
+    post(item: Item) {
+        return fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(item),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(checkStatus)
+        .then(parseJSON)
+        .catch((error: TypeError) => {
+            console.log('log client error ' + error);
+            throw new Error(
+                'There was an error updating the project. Please try again.'
+            );
+        });
+    },
     put(item: Item) {
         return fetch(`${url}/${item.id}`, {
             method: 'PUT',
@@ -70,20 +87,28 @@ const ItemAPI = {
                 'Content-Type': 'application/json'
             }
         })
-            .then(checkStatus)
-            .then(parseJSON)
-            .catch((error: TypeError) => {
-                console.log('log client error ' + error);
-                throw new Error(
-                    'There was an error updating the project. Please try again.'
-                );
-            });
+        .then(checkStatus)
+        .then(parseJSON)
+        .catch((error: TypeError) => {
+            console.log('log client error ' + error);
+            throw new Error(
+                'There was an error updating the project. Please try again.'
+            );
+        });
     },
     find(id: number) {
         return fetch(`${url}/${id}`)
             .then(checkStatus)
             .then(parseJSON)
             .then(convertToItemModel);
+    },
+    remove(id: number) {
+        return fetch(`${url}/${id}`, {
+            method: 'DELETE',
+        })
+        .then(checkStatus)
+        .then(parseJSON)
+        .then(convertToItemModel);
     },
 };
 

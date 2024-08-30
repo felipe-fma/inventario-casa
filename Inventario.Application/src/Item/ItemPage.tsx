@@ -3,6 +3,7 @@ import { ItemAPI } from './ItemAPI';
 import ItemForm from './ItemForm';
 import { Item } from './Item';
 import { useParams } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 
 function ItemPage(props: any) {
     const [loading, setLoading] = useState(false);
@@ -28,10 +29,9 @@ function ItemPage(props: any) {
     return (
         <div>
             {loading && (
-                <div className="center-page">
-                    <span className="spinner primary"></span>
-                    <p>Loading...</p>
-                </div>
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             )}
 
             {error && (
