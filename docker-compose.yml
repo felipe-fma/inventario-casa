@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Backend - .NET Core
+  backend:
+    build:
+      context: ./Inventario.Service
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    volumes:
+      - sqlite_data:/app/db
+    # depends_on:
+    #   - db
+    environment:
+        - ConnectionStrings__DefaultConnection=Data Source=db/HomeDataBase.db
+        - ASPNETCORE_ENVIRONMENT=Development
+    #   - ConnectionStrings__DefaultConnection=Server=db;Database=HomeDataBase;User=sa;Password=Inventario21;
+
+  # Frontend - React
+  frontend:
+    build:
+      context: ./Inventario.Application
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  # Database - SQL Server
+  # db:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   environment:
+  #     SA_PASSWORD: "Inventario21"
+  #     ACCEPT_EULA: "Y"
+  #   ports:
+  #     - "1433:1433"
+  #   volumes:
+  #     - sqlvolume:/var/opt/mssql
+
+volumes:
+  sqlite_data:

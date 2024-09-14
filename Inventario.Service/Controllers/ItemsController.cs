@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Inventario.Persistence.Repositoris;
-using Inventario.Persistence.Entity;
-using Inventario.Persistence;
+using Inventario.Service.Repositoris;
+using Inventario.Service.Entity;
 
-namespace Service.Controllers
+namespace Inventario.Service.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Inventario.Persistence.Repositoris;
-using Inventario.Persistence.Entity;
-using Inventario.Persistence;
+using Inventario.Service.Repositoris;
+using Inventario.Service.Entity;
 
-namespace Service.Controllers
+namespace Inventario.Service.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,19 +26,6 @@ namespace Service.Controllers
 
             return item;
         }
-
-        [HttpPost]
-        [Route("login")]
-        public ActionResult<User> Login()
-        {
-            var item = _repo.GetByID(id);
-
-            if (item == null)
-                return NotFound();
-
-            return item;
-        }
-
 
         // POST: api/Items
         [HttpPost]

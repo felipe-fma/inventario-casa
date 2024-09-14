@@ -1,4 +1,4 @@
-namespace Inventario.Persistence.Entity;
+namespace Inventario.Service.Entity;
 
 public class User
 {

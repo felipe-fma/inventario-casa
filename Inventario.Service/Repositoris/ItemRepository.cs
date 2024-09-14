@@ -1,6 +1,6 @@
-using Inventario.Persistence.Entity;
+using Inventario.Service.Entity;
 
-namespace Inventario.Persistence.Repositoris;
+namespace Inventario.Service.Repositoris;
 
 public class ItensRepository
 {

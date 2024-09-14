@@ -1,5 +1,5 @@
 import { Item } from './Item';
-const baseUrl = 'http://localhost:5041';
+const baseUrl = 'http://localhost:5000';
 const url = `${baseUrl}/api/Itens`;
 
 function translateStatusToErrorMessage(status: number) {
